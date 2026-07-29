@@ -9,11 +9,11 @@ export function SiteNav() {
           <Coffee className="h-4 w-4" />
         </span>
         <span className="flex flex-col leading-none">
-          <span className="font-display text-lg tracking-tight text-foreground">
-            Stars Hollow Tonight
+          <span className="font-display text-3xl text-foreground">
+            stars hollow tonight
           </span>
           <span className="mt-0.5 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-            a cozy episode picker
+            pick an episode
           </span>
         </span>
       </Link>
