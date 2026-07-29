@@ -179,17 +179,23 @@ function TonightPage() {
             <div className="animate-fade-in mt-4 rounded-xl border border-hairline bg-surface p-4">
               <p className="mb-2.5 font-label text-ink/60">Skip</p>
               <div className="flex flex-wrap gap-2">
-                {SKIP_OPTIONS.map((s) => (
-                  <MoodChip
-                    key={s.key}
-                    // reuse chip look; icon prop is fake for skips — hide it
-                    moodKey={"surprise"}
-                    label={s.label}
-                    variant="chip"
-                    selected={skips.has(s.key)}
-                    onClick={() => toggleSkip(s.key)}
-                  />
-                ))}
+                {SKIP_OPTIONS.map((s) => {
+                  const on = skips.has(s.key);
+                  return (
+                    <button
+                      key={s.key}
+                      onClick={() => toggleSkip(s.key)}
+                      className={cn(
+                        "focus-ring rounded-full border px-3 py-1.5 text-xs transition-colors",
+                        on
+                          ? "border-brick bg-brick text-primary-foreground"
+                          : "border-hairline bg-surface-2 text-ink/75 hover:border-ink/40",
+                      )}
+                    >
+                      {s.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
