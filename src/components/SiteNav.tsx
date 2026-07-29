@@ -1,43 +1,39 @@
 import { Link } from "@tanstack/react-router";
-import { CoffeeCup } from "./Doodles";
+import { cn } from "@/lib/utils";
 
 export function SiteNav() {
   return (
-    <header className="mx-auto w-full max-w-5xl px-5 pt-6 sm:px-8 sm:pt-10">
-      <div className="relative flex flex-col items-center gap-4 pb-6 sm:flex-row sm:items-end sm:justify-between">
-        <Link to="/" className="group flex items-end gap-3 text-left">
-          <CoffeeCup className="h-7 w-7 text-coffee tilt-l" />
-          <span className="leading-none">
-            <span className="block font-wordmark text-lg text-ink sm:text-xl">
-              stars hollow tonight
-            </span>
-            <span className="mt-1.5 block font-hand text-base text-brick tilt-r">
-              a very unofficial guide
-            </span>
+    <header className="sticky top-0 z-30 border-b border-hairline bg-background/85 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-3.5 sm:px-8">
+        <Link to="/" className="group flex items-center gap-2.5">
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brick text-primary-foreground">
+            <span className="font-wordmark text-[11px] leading-none">SH</span>
+          </span>
+          <span className="font-wordmark text-[13px] leading-none text-ink sm:text-sm">
+            Stars Hollow <span className="text-brick">Tonight</span>
           </span>
         </Link>
 
-        <nav className="flex items-center gap-5 font-label text-muted-foreground">
-          <Link
-            to="/"
-            activeOptions={{ exact: true }}
-            activeProps={{ className: "text-ink" }}
-            className="relative pb-1 transition-colors hover:text-ink [&.active]:hand-underline"
-          >
-            tonight
-          </Link>
-          <span aria-hidden className="text-rule">·</span>
-          <Link
-            to="/my"
-            activeProps={{ className: "text-ink" }}
-            className="relative pb-1 transition-colors hover:text-ink [&.active]:hand-underline"
-          >
-            my guide
-          </Link>
+        <nav className="flex items-center gap-1 text-sm">
+          <NavLink to="/">Tonight</NavLink>
+          <NavLink to="/my">My Guide</NavLink>
         </nav>
-
-        <div className="squiggle-rule pointer-events-none absolute inset-x-0 -bottom-1 w-full opacity-70" />
       </div>
     </header>
+  );
+}
+
+function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
+  return (
+    <Link
+      to={to}
+      activeOptions={{ exact: to === "/" }}
+      className={cn(
+        "focus-ring rounded-full px-3 py-1.5 font-medium text-ink/65 transition-colors hover:text-ink",
+      )}
+      activeProps={{ className: "bg-surface-2 text-ink" }}
+    >
+      {children}
+    </Link>
   );
 }
