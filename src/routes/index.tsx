@@ -160,6 +160,7 @@ function TonightPage() {
               onClick={() => setShowSkip((v) => !v)}
               className="mx-auto flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
+              <Coffee className="h-3.5 w-3.5" strokeWidth={1.75} />
               what are we not in the mood for?
               <ChevronDown
                 className={cn("h-4 w-4 transition-transform", showSkip && "rotate-180")}
