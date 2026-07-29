@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ChevronDown, Coffee, Dices, Paperclip, Star } from "lucide-react";
+import { ChevronDown, Coffee, Dices, Landmark, Paperclip, Star } from "lucide-react";
 import { MOODS, SKIP_OPTIONS, type Mood, type SkipTag, type Episode } from "@/data/episodes";
 import { pickEpisode, randomEpisode } from "@/lib/recommend";
 import { MoodChip } from "@/components/MoodChip";
