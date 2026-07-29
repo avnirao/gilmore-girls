@@ -96,18 +96,10 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Adobe Caslon Pro";
-  src: url("/__l5e/assets-v1/646a3828-157d-4f20-ae2e-96384a785a26/Adobe_Caslon_Pro_Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
 .font-serif-italic {
-  font-family: "Adobe Caslon Pro", "Iowan Old Style", Georgia, serif;
+  font-family: "Cormorant Garamond", "Adobe Caslon Pro", "Iowan Old Style", Georgia, serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 
