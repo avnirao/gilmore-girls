@@ -1,35 +1,42 @@
 import { Link } from "@tanstack/react-router";
+import { CoffeeCup } from "./Doodles";
 
 export function SiteNav() {
   return (
-    <header className="mx-auto w-full max-w-5xl px-5 pt-8 sm:px-8 sm:pt-10">
-      <div className="flex flex-col items-center gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
-        <Link to="/" className="group text-center sm:text-left">
-          <span className="block font-wordmark text-xl leading-none text-foreground sm:text-2xl">
-            Stars Hollow Tonight
-          </span>
-          <span className="mt-2 block text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-            An Unofficial Episode Guide
+    <header className="mx-auto w-full max-w-5xl px-5 pt-6 sm:px-8 sm:pt-10">
+      <div className="relative flex flex-col items-center gap-4 pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <Link to="/" className="group flex items-end gap-3 text-left">
+          <CoffeeCup className="h-7 w-7 text-coffee tilt-l" />
+          <span className="leading-none">
+            <span className="block font-wordmark text-lg text-ink sm:text-xl">
+              stars hollow tonight
+            </span>
+            <span className="mt-1.5 block font-hand text-base text-brick tilt-r">
+              a very unofficial guide
+            </span>
           </span>
         </Link>
 
-        <nav className="flex items-center gap-6 text-xs uppercase tracking-[0.24em]">
+        <nav className="flex items-center gap-5 font-label text-muted-foreground">
           <Link
             to="/"
             activeOptions={{ exact: true }}
-            activeProps={{ className: "text-foreground border-foreground" }}
-            className="border-b border-transparent pb-1 text-muted-foreground transition-colors hover:text-foreground"
+            activeProps={{ className: "text-ink" }}
+            className="relative pb-1 transition-colors hover:text-ink [&.active]:hand-underline"
           >
-            Tonight
+            tonight
           </Link>
+          <span aria-hidden className="text-rule">·</span>
           <Link
             to="/my"
-            activeProps={{ className: "text-foreground border-foreground" }}
-            className="border-b border-transparent pb-1 text-muted-foreground transition-colors hover:text-foreground"
+            activeProps={{ className: "text-ink" }}
+            className="relative pb-1 transition-colors hover:text-ink [&.active]:hand-underline"
           >
-            My Guide
+            my guide
           </Link>
         </nav>
+
+        <div className="squiggle-rule pointer-events-none absolute inset-x-0 -bottom-1 w-full opacity-70" />
       </div>
     </header>
   );

@@ -13,11 +13,13 @@ export function MoodChip({ label, selected, onClick, size = "md" }: Props) {
       type="button"
       onClick={onClick}
       className={cn(
-        "group relative inline-flex items-center rounded-sm border border-border bg-card text-card-foreground transition-colors duration-150",
-        "hover:border-foreground/60",
-        size === "md" ? "px-5 py-2.5 text-sm" : "px-3 py-1.5 text-xs",
-        "font-display",
-        selected && "border-foreground bg-foreground text-background",
+        "group relative inline-flex items-center justify-center border transition-all duration-150",
+        "border-rule bg-paper text-ink hover:-translate-y-0.5 hover:border-coffee",
+        size === "md" ? "px-4 py-2 text-sm" : "px-3 py-1 text-xs",
+        "font-body lowercase",
+        "shadow-[2px_2px_0_-1px_var(--color-rule)]",
+        selected &&
+          "border-coffee bg-coffee text-primary-foreground shadow-[2px_2px_0_-1px_var(--color-brick)]",
       )}
     >
       {label}
