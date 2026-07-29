@@ -99,11 +99,17 @@ function TonightPage() {
       <SiteNav />
 
       <main className="mx-auto w-full max-w-5xl px-5 pb-24 pt-10 sm:px-8 sm:pt-16">
-        <section className="text-center">
+        <section className="relative text-center">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 -top-6 hidden -translate-x-[9rem] -rotate-[18deg] text-muted-foreground/70 sm:block"
+          >
+            <Paperclip className="h-6 w-6" strokeWidth={1.5} />
+          </span>
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs tracking-[0.22em] text-muted-foreground">
             tonight's pick
           </p>
-          <h1 className="font-display text-5xl leading-[1.05] tracking-[0.03em] text-foreground sm:text-7xl">
+          <h1 className="font-display text-5xl leading-[1.05] tracking-[0.01em] text-foreground sm:text-7xl">
             what are we feeling
             <br className="hidden sm:block" /> <span className="text-primary">tonight?</span>
           </h1>
