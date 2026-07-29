@@ -103,14 +103,14 @@ function TonightPage() {
       <main className="mx-auto w-full max-w-5xl px-5 pb-24 pt-10 sm:px-8 sm:pt-16">
         <section className="text-center">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-            <Sparkles className="h-3 w-3" /> tonight's pick
+            <Sparkles className="h-3 w-3" /> tonight
           </p>
-          <h1 className="font-display text-4xl leading-[1.05] tracking-tight text-foreground sm:text-6xl">
-            What are we feeling
+          <h1 className="font-display text-6xl leading-[1] text-foreground sm:text-8xl">
+            what are we feeling
             <br className="hidden sm:block" /> <span className="italic text-primary">tonight?</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-balance text-muted-foreground sm:text-lg">
-            Tap a mood or three. We'll pour the coffee and pick the episode.
+          <p className="mx-auto mt-5 max-w-xl text-balance text-muted-foreground sm:text-lg">
+            pick a vibe (or three). we'll find you an episode.
           </p>
         </section>
 
@@ -136,7 +136,7 @@ function TonightPage() {
                 "hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0",
               )}
             >
-              Find my episode
+              find me an episode
               <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </button>
 
@@ -148,7 +148,7 @@ function TonightPage() {
               )}
             >
               <Dices className={cn("h-4 w-4", shake && "animate-spin")} />
-              or, surprise me
+              or just surprise me
             </button>
           </div>
 
@@ -157,7 +157,7 @@ function TonightPage() {
               onClick={() => setShowSkip((v) => !v)}
               className="mx-auto flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              What are we <span className="italic">not</span> in the mood for?
+              anything you're <span className="italic">not</span> up for?
               <ChevronDown
                 className={cn("h-4 w-4 transition-transform", showSkip && "rotate-180")}
               />
@@ -187,17 +187,17 @@ function TonightPage() {
               episode={current}
               matchedMoods={mode === "random" ? [] : moodArr}
               reasonOverride={
-                mode === "random" ? "Rolled the dice — here's your evening." : undefined
+                mode === "random" ? "rolled the dice — enjoy." : undefined
               }
               onTryAgain={mode === "random" ? surprise : find}
             />
           ) : (
             <div className="mx-auto max-w-2xl rounded-3xl border border-dashed border-border bg-card/40 p-10 text-center text-muted-foreground">
-              <p className="font-display text-2xl text-foreground/70">
-                Your evening starts up there ↑
+              <p className="font-display text-4xl text-foreground/70">
+                pick something up top ↑
               </p>
               <p className="mt-2 text-sm">
-                Pick a mood or roll the dice. We'll queue up the perfect episode.
+                tap a mood or roll the dice — that's it.
               </p>
             </div>
           )}
@@ -206,7 +206,7 @@ function TonightPage() {
 
       <footer className="mx-auto max-w-5xl px-5 pb-10 text-center text-xs text-muted-foreground sm:px-8">
         <p>
-          A fan-made love letter. Not affiliated with the show — just very fond of it. ☕🍂
+          made by a fan, for fans. not affiliated with the show — just really into it. ☕🍂
         </p>
       </footer>
     </div>

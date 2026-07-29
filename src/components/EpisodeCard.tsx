@@ -16,15 +16,15 @@ const MOOD_META = Object.fromEntries(MOODS.filter((m) => m.key !== "surprise").m
 
 function buildReason(ep: Episode, moods: Mood[]): string {
   if (moods.length === 0) {
-    return `A little bit of everything Stars Hollow does best.`;
+    return `a bit of everything stars hollow does well.`;
   }
   const sorted = [...moods].sort((a, b) => (ep.scores[b] ?? 0) - (ep.scores[a] ?? 0));
   const top = sorted[0];
   const label = MOOD_META[top]?.label?.toLowerCase() ?? top;
   const val = ep.scores[top];
-  if (val >= 9) return `Tonight's pick for maximum ${label}.`;
-  if (val >= 7) return `A very ${label} evening, with a little of everything else stitched in.`;
-  return `A gentler ${label} choice — nothing loud, just right.`;
+  if (val >= 9) return `peak ${label} energy. enjoy.`;
+  if (val >= 7) return `plenty of ${label}, plus a little of the rest.`;
+  return `a softer ${label} pick — nothing too loud.`;
 }
 
 export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOverride }: Props) {
@@ -82,7 +82,7 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
         )}
       </div>
 
-      <h2 className="mt-3 font-display text-3xl leading-tight tracking-tight text-foreground sm:text-4xl">
+      <h2 className="mt-3 font-display text-5xl leading-[0.95] text-foreground sm:text-6xl">
         {episode.title}
       </h2>
 
@@ -111,11 +111,11 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
         <button
           onClick={() => {
             add("watched", episode.id);
-            fire(isWatched ? "Already on your list ✨" : "Added to watched ✨");
+            fire(isWatched ? "already on the list ✨" : "marked as watched ✨");
           }}
           className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-cozy transition-all hover:-translate-y-0.5 hover:shadow-md"
         >
-          <Play className="h-4 w-4" /> Watch this
+          <Play className="h-4 w-4" /> watch this
         </button>
 
         {onTryAgain && (
@@ -123,14 +123,14 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
             onClick={onTryAgain}
             className="inline-flex items-center gap-2 rounded-full border-2 border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50"
           >
-            <RefreshCw className="h-4 w-4" /> Try again
+            <RefreshCw className="h-4 w-4" /> try again
           </button>
         )}
 
         <button
           onClick={() => {
             toggle("favorites", episode.id);
-            if (!isFav) fire("Saved to favorites 💕");
+            if (!isFav) fire("favorited 💕");
           }}
           className={cn(
             "inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-border bg-card transition-all hover:-translate-y-0.5",
@@ -144,7 +144,7 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
         <button
           onClick={() => {
             toggle("watchlist", episode.id);
-            if (!isSaved) fire("Added to watchlist 🔖");
+            if (!isSaved) fire("saved for later 🔖");
           }}
           className={cn(
             "inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-border bg-card transition-all hover:-translate-y-0.5",

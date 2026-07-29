@@ -60,15 +60,15 @@ function MyPage() {
           <p className="mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
             your scrapbook
           </p>
-          <h1 className="font-display text-4xl tracking-tight sm:text-5xl">My Gilmore Girls</h1>
+          <h1 className="font-display text-6xl sm:text-7xl">my gilmore girls</h1>
           <p className="mt-3 max-w-xl text-muted-foreground">
-            Everything you've loved, saved, and watched — kept in one very small, very cozy corner.
+            everything you've loved, saved, or watched — all in one tiny cozy corner.
           </p>
         </section>
 
         <section className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-cozy paper-texture sm:p-8">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="font-display text-xl tracking-tight">Episodes watched</h2>
+            <h2 className="font-display text-3xl">episodes watched</h2>
             <p className="tabular-nums text-sm text-muted-foreground">
               <span className="text-2xl font-semibold text-foreground">{watchedCount}</span>{" "}
               <span className="text-foreground/60">/ {total}</span>
@@ -80,7 +80,7 @@ function MyPage() {
               style={{ width: `${pct}%` }}
             />
           </div>
-          <p className="mt-2 text-xs text-muted-foreground">{pct}% of Stars Hollow explored</p>
+          <p className="mt-2 text-xs text-muted-foreground">{pct}% of stars hollow so far</p>
         </section>
 
         <section className="mt-10">
@@ -111,13 +111,13 @@ function MyPage() {
           <div className="mt-6">
             {list.length === 0 ? (
               <div className="rounded-3xl border border-dashed border-border bg-card/40 p-10 text-center">
-                <p className="font-display text-2xl text-foreground/70">Nothing here yet</p>
+                <p className="font-display text-4xl text-foreground/70">nothing here yet</p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Head back to{" "}
+                  head back to{" "}
                   <Link to="/" className="text-primary underline underline-offset-4">
                     tonight's picker
                   </Link>{" "}
-                  and start collecting your favorites.
+                  and start saving your favorites.
                 </p>
               </div>
             ) : (
@@ -132,7 +132,7 @@ function MyPage() {
                         S{ep.season}·E{ep.episode}
                       </span>
                     </div>
-                    <h3 className="mt-2 font-display text-xl tracking-tight">{ep.title}</h3>
+                    <h3 className="mt-2 font-display text-3xl leading-none">{ep.title}</h3>
                     <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
                       {ep.description}
                     </p>
