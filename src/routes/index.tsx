@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ChevronDown, Dices } from "lucide-react";
+import { ChevronDown, Coffee, Dices, Paperclip, Star } from "lucide-react";
 import { MOODS, SKIP_OPTIONS, type Mood, type SkipTag, type Episode } from "@/data/episodes";
 import { pickEpisode, randomEpisode } from "@/lib/recommend";
 import { MoodChip } from "@/components/MoodChip";
@@ -99,11 +99,17 @@ function TonightPage() {
       <SiteNav />
 
       <main className="mx-auto w-full max-w-5xl px-5 pb-24 pt-10 sm:px-8 sm:pt-16">
-        <section className="text-center">
+        <section className="relative text-center">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 -top-6 hidden -translate-x-[9rem] -rotate-[18deg] text-muted-foreground/70 sm:block"
+          >
+            <Paperclip className="h-6 w-6" strokeWidth={1.5} />
+          </span>
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs tracking-[0.22em] text-muted-foreground">
             tonight's pick
           </p>
-          <h1 className="font-display text-5xl leading-[1.05] tracking-[0.03em] text-foreground sm:text-7xl">
+          <h1 className="font-display text-5xl leading-[1.05] tracking-[0.01em] text-foreground sm:text-7xl">
             what are we feeling
             <br className="hidden sm:block" /> <span className="text-primary">tonight?</span>
           </h1>
@@ -154,6 +160,7 @@ function TonightPage() {
               onClick={() => setShowSkip((v) => !v)}
               className="mx-auto flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
+              <Coffee className="h-3.5 w-3.5" strokeWidth={1.75} />
               what are we not in the mood for?
               <ChevronDown
                 className={cn("h-4 w-4 transition-transform", showSkip && "rotate-180")}
@@ -189,6 +196,7 @@ function TonightPage() {
             />
           ) : (
             <div className="mx-auto max-w-2xl rounded-3xl border border-dashed border-border bg-card/40 p-10 text-center text-muted-foreground">
+              <Star className="mx-auto mb-3 h-5 w-5 text-primary/70" strokeWidth={1.5} />
               <p className="font-display text-3xl text-foreground/70">
                 your evening starts up there
               </p>

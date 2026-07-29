@@ -60,7 +60,7 @@ function MyPage() {
           <p className="mb-3 text-xs tracking-[0.22em] text-muted-foreground">
             your scrapbook
           </p>
-          <h1 className="font-display text-5xl tracking-[0.03em] sm:text-6xl">my gilmore girls</h1>
+          <h1 className="font-display text-5xl tracking-[0.01em] sm:text-6xl">my gilmore girls</h1>
           <p className="mt-3 max-w-xl text-muted-foreground">
             everything you've loved, saved, and watched — kept in one small, cozy corner.
           </p>
