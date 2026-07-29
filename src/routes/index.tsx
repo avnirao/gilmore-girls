@@ -103,7 +103,7 @@ function TonightPage() {
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs tracking-[0.22em] text-muted-foreground">
             tonight's pick
           </p>
-          <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-foreground sm:text-7xl">
+          <h1 className="font-display text-5xl leading-[1.05] tracking-[0.03em] text-foreground sm:text-7xl">
             what are we feeling
             <br className="hidden sm:block" /> <span className="text-primary">tonight?</span>
           </h1>
