@@ -5,9 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * stars hollow tonight
- * modern streaming ui, gilmore-girls-inspired palette.
- * wordmark keeps its antique roman voice; everything else is modern sans.
+ * Stars Hollow Tonight — cozy scrapbook design system.
+ * Warm cream parchment, coffee neutrals, autumn accents.
  */
 
 @theme inline {
@@ -16,6 +15,8 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -37,215 +38,107 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-ink: var(--ink);
-  --color-cream: var(--cream);
-  --color-coffee: var(--coffee);
-  --color-coffee-2: var(--coffee-2);
-  --color-brick: var(--brick);
-  --color-dusty-blue: var(--dusty-blue);
-  --color-forest: var(--forest);
-  --color-warm-red: var(--warm-red);
-  --color-mustard: var(--mustard);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-hairline: var(--hairline);
+  --font-sans: "Fraunces", "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-display: "Caveat", "Kalam", ui-serif, cursive;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-wordmark: "Cinzel", "Trajan Pro", ui-serif, Georgia, serif;
-  --font-serif: "Fraunces", ui-serif, Georgia, serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --shadow-cozy: 0 1px 0 rgba(120, 82, 50, 0.04),
+    0 12px 30px -18px rgba(120, 82, 50, 0.28),
+    0 4px 10px -6px rgba(120, 82, 50, 0.12);
+
+  --animate-wiggle: wiggle 0.5s ease-in-out;
+  --animate-fade-in: fade-in 0.35s ease-out;
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1rem;
 
-  /* dark warm background — a lit-window-at-night feeling */
-  --background: oklch(0.19 0.014 55);
-  --surface: oklch(0.235 0.016 55);
-  --surface-2: oklch(0.28 0.018 55);
-  --hairline: oklch(0.36 0.02 55);
+  /* warm parchment cream */
+  --background: oklch(0.97 0.018 82);
+  --foreground: oklch(0.28 0.03 45);
 
-  --foreground: oklch(0.96 0.012 82);
-  --ink: oklch(0.96 0.012 82);
-  --cream: oklch(0.955 0.022 82);
+  --card: oklch(0.985 0.012 82);
+  --card-foreground: oklch(0.28 0.03 45);
+  --popover: oklch(0.985 0.012 82);
+  --popover-foreground: oklch(0.28 0.03 45);
 
-  --card: oklch(0.235 0.016 55);
-  --card-foreground: oklch(0.96 0.012 82);
-  --popover: oklch(0.235 0.016 55);
-  --popover-foreground: oklch(0.96 0.012 82);
+  /* espresso brown */
+  --primary: oklch(0.42 0.06 40);
+  --primary-foreground: oklch(0.98 0.015 82);
 
-  /* deep coffee brown */
-  --coffee: oklch(0.42 0.06 45);
-  --coffee-2: oklch(0.32 0.05 42);
+  /* soft cafe au lait */
+  --secondary: oklch(0.92 0.025 75);
+  --secondary-foreground: oklch(0.35 0.04 45);
 
-  /* muted burgundy / brick — primary action */
-  --brick: oklch(0.48 0.14 25);
-  --primary: oklch(0.48 0.14 25);
-  --primary-foreground: oklch(0.97 0.012 82);
+  --muted: oklch(0.93 0.02 78);
+  --muted-foreground: oklch(0.5 0.03 55);
 
-  --secondary: oklch(0.28 0.018 55);
-  --secondary-foreground: oklch(0.96 0.012 82);
+  /* autumn maple accent */
+  --accent: oklch(0.72 0.14 50);
+  --accent-foreground: oklch(0.2 0.03 40);
 
-  --muted: oklch(0.28 0.018 55);
-  --muted-foreground: oklch(0.72 0.02 68);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.98 0.015 82);
 
-  /* dusty blue accent */
-  --dusty-blue: oklch(0.62 0.075 235);
-  --accent: oklch(0.62 0.075 235);
-  --accent-foreground: oklch(0.15 0.02 55);
+  --border: oklch(0.88 0.025 75);
+  --input: oklch(0.88 0.025 75);
+  --ring: oklch(0.55 0.08 45);
+}
 
-  /* soft forest green */
-  --forest: oklch(0.55 0.075 155);
-
-  /* warm red (luke's diner signage) */
-  --warm-red: oklch(0.58 0.17 28);
-
-  /* warm mustard (autumn accent, used sparingly) */
-  --mustard: oklch(0.75 0.11 82);
-
-  --destructive: oklch(0.55 0.18 25);
-  --destructive-foreground: oklch(0.97 0.012 82);
-
-  --border: oklch(0.36 0.02 55);
-  --input: oklch(0.36 0.02 55);
-  --ring: oklch(0.62 0.075 235);
+@font-face {
+  font-family: "system-fallback";
+  src: local("Georgia");
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   background-color: var(--color-background);
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: "ss01", "cv11";
-}
-
-/* ---------- typography helpers ---------- */
-
-.font-wordmark {
-  font-family: var(--font-wordmark);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  background-image:
+    radial-gradient(oklch(0.85 0.05 60 / 0.12) 1px, transparent 1px),
+    radial-gradient(oklch(0.75 0.08 40 / 0.06) 1px, transparent 1px);
+  background-size: 32px 32px, 18px 18px;
+  background-position: 0 0, 9px 9px;
 }
 
 .font-display {
   font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-.font-serif {
-  font-family: var(--font-serif);
+.shadow-cozy {
+  box-shadow: var(--shadow-cozy);
 }
 
-.font-mono {
-  font-family: var(--font-mono);
+.paper-texture {
+  background-image:
+    linear-gradient(var(--color-card), var(--color-card)),
+    radial-gradient(oklch(0.65 0.08 45 / 0.06) 1px, transparent 1px);
+  background-size: auto, 14px 14px;
+  background-blend-mode: multiply;
 }
 
-.font-label {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.68rem;
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
 }
 
-/* ---------- surfaces ---------- */
-
-.surface {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-hairline);
-}
-
-.surface-2 {
-  background-color: var(--color-surface-2);
-  border: 1px solid var(--color-hairline);
-}
-
-/* soft glow behind hero */
-.aurora {
-  background:
-    radial-gradient(60% 60% at 15% 10%, oklch(0.48 0.14 25 / 0.22), transparent 60%),
-    radial-gradient(50% 50% at 90% 20%, oklch(0.62 0.075 235 / 0.18), transparent 60%),
-    radial-gradient(60% 60% at 60% 100%, oklch(0.42 0.06 45 / 0.28), transparent 60%);
-}
-
-/* horizontal scroll row */
-.row-scroll {
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: 1.25rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-hairline) transparent;
-}
-.row-scroll > * { scroll-snap-align: start; }
-.row-scroll::-webkit-scrollbar { height: 6px; }
-.row-scroll::-webkit-scrollbar-thumb {
-  background: var(--color-hairline);
-  border-radius: 999px;
-}
-
-/* ---------- episode tile backdrops (original, abstract) ---------- */
-
-.tile-bg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  border-radius: inherit;
-}
-.tile-bg::before,
-.tile-bg::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(24px);
-  opacity: 0.9;
-}
-
-.tile-v-coffee { background: linear-gradient(140deg, oklch(0.32 0.05 42), oklch(0.22 0.03 40)); }
-.tile-v-coffee::before { width: 60%; aspect-ratio: 1; right: -10%; top: -20%; background: oklch(0.48 0.14 25 / 0.55); }
-.tile-v-coffee::after { width: 55%; aspect-ratio: 1; left: -15%; bottom: -25%; background: oklch(0.42 0.06 45 / 0.65); }
-
-.tile-v-night { background: linear-gradient(140deg, oklch(0.24 0.04 260), oklch(0.18 0.03 250)); }
-.tile-v-night::before { width: 55%; aspect-ratio: 1; right: -10%; top: -15%; background: oklch(0.62 0.075 235 / 0.55); }
-.tile-v-night::after { width: 50%; aspect-ratio: 1; left: -10%; bottom: -20%; background: oklch(0.48 0.14 25 / 0.45); }
-
-.tile-v-autumn { background: linear-gradient(140deg, oklch(0.34 0.08 55), oklch(0.24 0.04 40)); }
-.tile-v-autumn::before { width: 60%; aspect-ratio: 1; right: -12%; top: -18%; background: oklch(0.62 0.14 45 / 0.55); }
-.tile-v-autumn::after { width: 55%; aspect-ratio: 1; left: -12%; bottom: -22%; background: oklch(0.75 0.11 82 / 0.4); }
-
-.tile-v-forest { background: linear-gradient(140deg, oklch(0.28 0.05 160), oklch(0.2 0.03 155)); }
-.tile-v-forest::before { width: 55%; aspect-ratio: 1; right: -10%; top: -15%; background: oklch(0.55 0.075 155 / 0.55); }
-.tile-v-forest::after { width: 50%; aspect-ratio: 1; left: -12%; bottom: -22%; background: oklch(0.62 0.075 235 / 0.35); }
-
-.tile-v-rose { background: linear-gradient(140deg, oklch(0.3 0.08 20), oklch(0.22 0.04 20)); }
-.tile-v-rose::before { width: 55%; aspect-ratio: 1; right: -10%; top: -15%; background: oklch(0.62 0.16 20 / 0.5); }
-.tile-v-rose::after { width: 50%; aspect-ratio: 1; left: -12%; bottom: -22%; background: oklch(0.75 0.09 82 / 0.35); }
-
-.tile-v-slate { background: linear-gradient(140deg, oklch(0.28 0.02 55), oklch(0.2 0.015 55)); }
-.tile-v-slate::before { width: 55%; aspect-ratio: 1; right: -10%; top: -15%; background: oklch(0.55 0.06 235 / 0.4); }
-.tile-v-slate::after { width: 50%; aspect-ratio: 1; left: -12%; bottom: -22%; background: oklch(0.48 0.14 25 / 0.35); }
-
-/* skeuomorphic focus ring for buttons */
-.focus-ring:focus-visible {
-  outline: 2px solid var(--color-ring);
-  outline-offset: 2px;
-}
-
-/* animations */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.animate-fade-in { animation: fade-in 0.35s ease-out; }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-rise { animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.animate-wiggle { animation: var(--animate-wiggle); }
+.animate-fade-in { animation: var(--animate-fade-in); }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  ::selection { background: var(--color-brick); color: var(--color-primary-foreground); }
+  * {
+    border-color: var(--color-border);
+  }
+  h1, h2, h3 {
+    font-family: var(--font-sans);
+  }
 }
