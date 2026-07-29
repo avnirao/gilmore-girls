@@ -106,6 +106,12 @@ function TonightPage() {
           >
             <Paperclip className="h-6 w-6" strokeWidth={1.5} />
           </span>
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 -top-8 hidden translate-x-[7rem] rotate-[10deg] rounded-full border border-border/70 bg-card p-2 text-primary shadow-cozy sm:block"
+          >
+            <Landmark className="h-4 w-4" strokeWidth={1.5} />
+          </span>
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs tracking-[0.22em] text-muted-foreground">
             tonight's pick
           </p>
