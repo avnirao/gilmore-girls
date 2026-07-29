@@ -12,19 +12,21 @@ interface Props {
   reasonOverride?: string;
 }
 
-const MOOD_META = Object.fromEntries(MOODS.filter((m) => m.key !== "surprise").map((m) => [m.key, m]));
+const MOOD_LABEL = Object.fromEntries(
+  MOODS.filter((m) => m.key !== "surprise").map((m) => [m.key, m.label]),
+);
 
 function buildReason(ep: Episode, moods: Mood[]): string {
   if (moods.length === 0) {
-    return `A little bit of everything Stars Hollow does best.`;
+    return `a little bit of everything stars hollow does best.`;
   }
   const sorted = [...moods].sort((a, b) => (ep.scores[b] ?? 0) - (ep.scores[a] ?? 0));
   const top = sorted[0];
-  const label = MOOD_META[top]?.label?.toLowerCase() ?? top;
+  const label = MOOD_LABEL[top] ?? top;
   const val = ep.scores[top];
-  if (val >= 9) return `Tonight's pick for maximum ${label}.`;
-  if (val >= 7) return `A very ${label} evening, with a little of everything else stitched in.`;
-  return `A gentler ${label} choice — nothing loud, just right.`;
+  if (val >= 9) return `tonight's pick for maximum ${label}.`;
+  if (val >= 7) return `a very ${label} evening, with a little of everything else along for the ride.`;
+  return `a gentler ${label} pick — nothing loud, just right.`;
 }
 
 export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOverride }: Props) {
@@ -72,8 +74,8 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
       )}
 
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-widest text-secondary-foreground">
-          S{episode.season} · E{episode.episode}
+        <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold tracking-widest text-secondary-foreground">
+          s{episode.season} · e{episode.episode}
         </span>
         {isWatched && (
           <span className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground">
@@ -92,30 +94,32 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
 
       <div className="mt-6 space-y-2.5">
         {topMoods.map(({ mood, score }) => (
-          <VibeBar key={mood} label={MOOD_META[mood]?.label ?? mood} emoji={MOOD_META[mood]?.emoji ?? "•"} score={score} />
+          <VibeBar key={mood} label={MOOD_LABEL[mood] ?? mood} score={score} />
         ))}
       </div>
 
-      <div className="mt-6 flex flex-wrap gap-2">
-        {episode.tags.map((t) => (
-          <span
-            key={t}
-            className="rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/70"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
+      {episode.tags.length > 0 && (
+        <div className="mt-6 flex flex-wrap gap-2">
+          {episode.tags.map((t) => (
+            <span
+              key={t}
+              className="rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/70"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      )}
 
       <div className="mt-8 flex flex-wrap items-center gap-2 sm:gap-3">
         <button
           onClick={() => {
             add("watched", episode.id);
-            fire(isWatched ? "Already on your list ✨" : "Added to watched ✨");
+            fire(isWatched ? "already on your list" : "added to watched");
           }}
           className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-cozy transition-all hover:-translate-y-0.5 hover:shadow-md"
         >
-          <Play className="h-4 w-4" /> Watch this
+          <Play className="h-4 w-4" /> watch this
         </button>
 
         {onTryAgain && (
@@ -123,20 +127,20 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
             onClick={onTryAgain}
             className="inline-flex items-center gap-2 rounded-full border-2 border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50"
           >
-            <RefreshCw className="h-4 w-4" /> Try again
+            <RefreshCw className="h-4 w-4" /> try again
           </button>
         )}
 
         <button
           onClick={() => {
             toggle("favorites", episode.id);
-            if (!isFav) fire("Saved to favorites 💕");
+            if (!isFav) fire("saved to favorites");
           }}
           className={cn(
             "inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-border bg-card transition-all hover:-translate-y-0.5",
             isFav && "border-rose-400 bg-rose-50 text-rose-500",
           )}
-          aria-label="Favorite"
+          aria-label="favorite"
         >
           <Heart className={cn("h-4 w-4", isFav && "fill-current")} />
         </button>
@@ -144,13 +148,13 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
         <button
           onClick={() => {
             toggle("watchlist", episode.id);
-            if (!isSaved) fire("Added to watchlist 🔖");
+            if (!isSaved) fire("added to watchlist");
           }}
           className={cn(
             "inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-border bg-card transition-all hover:-translate-y-0.5",
             isSaved && "border-primary bg-primary/10 text-primary",
           )}
-          aria-label="Save for later"
+          aria-label="save for later"
         >
           <Bookmark className={cn("h-4 w-4", isSaved && "fill-current")} />
         </button>
@@ -159,14 +163,11 @@ export function EpisodeCard({ episode, matchedMoods = [], onTryAgain, reasonOver
   );
 }
 
-function VibeBar({ label, emoji, score }: { label: string; emoji: string; score: number }) {
+function VibeBar({ label, score }: { label: string; score: number }) {
   const pct = Math.max(4, score * 10);
   return (
     <div className="flex items-center gap-3">
-      <span className="w-32 shrink-0 text-sm text-foreground/80">
-        <span className="mr-1.5">{emoji}</span>
-        {label}
-      </span>
+      <span className="w-32 shrink-0 text-sm text-foreground/80">{label}</span>
       <div className="relative h-2 flex-1 overflow-hidden rounded-full bg-secondary">
         <div
           className="absolute inset-y-0 left-0 rounded-full bg-primary/80 transition-[width] duration-700 ease-out"
