@@ -6,22 +6,23 @@ import { pickEpisode, randomEpisode } from "@/lib/recommend";
 import { MoodChip } from "@/components/MoodChip";
 import { EpisodeCard } from "@/components/EpisodeCard";
 import { SiteNav } from "@/components/SiteNav";
+import { ArrowScribble, CoffeeCup, StarDoodle, WavyRule } from "@/components/Doodles";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Stars Hollow Tonight — A Gilmore Girls Episode Guide" },
+      { title: "stars hollow tonight — which gilmore girls episode fits your mood?" },
       {
         name: "description",
         content:
-          "An unofficial fan-made episode picker for Gilmore Girls. Choose a mood and find the right episode from all 153.",
+          "a small, fan-made guide for picking the right gilmore girls episode for tonight. pick a mood — cozy, autumn, chaos — and we'll find you one.",
       },
-      { property: "og:title", content: "Stars Hollow Tonight" },
+      { property: "og:title", content: "stars hollow tonight" },
       {
         property: "og:description",
         content:
-          "A fan-made mood-based episode guide covering all 153 episodes of Gilmore Girls.",
+          "a small, fan-made guide for picking the right gilmore girls episode for tonight.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -42,10 +43,7 @@ function TonightPage() {
   const skipArr = useMemo(() => Array.from(skips), [skips]);
 
   const toggleMood = (m: Mood | "surprise") => {
-    if (m === "surprise") {
-      surprise();
-      return;
-    }
+    if (m === "surprise") return surprise();
     setSelected((s) => {
       const n = new Set(s);
       if (n.has(m)) n.delete(m);
@@ -96,78 +94,88 @@ function TonightPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-ink">
       <SiteNav />
 
-      <main className="mx-auto w-full max-w-4xl px-5 pb-24 pt-14 sm:px-8 sm:pt-20">
-        <section className="text-center">
-          <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-            Vol. I — All 153 Episodes
-          </p>
-          <h1 className="mt-5 font-wordmark text-3xl leading-tight text-foreground sm:text-5xl">
-            Which Episode
-            <br />
-            Tonight?
-          </h1>
-          <div className="mx-auto mt-6 h-px w-16 bg-border" />
-          <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Pick a mood, or a few. We'll suggest an episode from the full run
-            of the series.
-          </p>
+      <main className="mx-auto w-full max-w-4xl px-5 pb-24 pt-10 sm:px-8 sm:pt-14">
+        {/* ------- hero ------- */}
+        <section className="relative">
+          <div className="flex flex-col items-start gap-1">
+            <span className="font-label text-brick">from stars hollow, with love</span>
+            <h1 className="font-wordmark text-4xl leading-[0.95] text-ink sm:text-6xl">
+              which episode
+              <br />
+              <span className="hand-underline">tonight?</span>
+            </h1>
+            <p className="mt-4 max-w-lg font-body text-lg text-ink/85">
+              pick a mood — or two, or three. we'll flip through the whole run of the
+              show and hand you one.
+            </p>
+            <span className="font-hand mt-3 flex items-center gap-2 text-xl text-coffee tilt-r">
+              <CoffeeCup className="h-5 w-5" />
+              coffee optional. mostly required.
+            </span>
+          </div>
         </section>
 
+        {/* ------- mood picker ------- */}
         <section className="mt-14">
-          <p className="mb-4 text-center text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-            The Mood
-          </p>
-          <div className="mx-auto flex max-w-2xl flex-wrap justify-center gap-2">
+          <div className="flex items-center gap-3">
+            <StarDoodle className="h-4 w-4 text-brick" />
+            <p className="font-stamp text-xs text-brick">the mood</p>
+            <WavyRule className="h-2 flex-1 text-rule" />
+          </div>
+
+          <div className="mt-5 flex flex-wrap justify-center gap-2 sm:justify-start sm:gap-2.5">
             {MOODS.map((m) => (
               <MoodChip
                 key={m.key}
-                label={m.label}
+                label={m.label.toLowerCase()}
                 selected={m.key !== "surprise" && selected.has(m.key as Mood)}
                 onClick={() => toggleMood(m.key)}
               />
             ))}
           </div>
 
-          <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center gap-3">
+          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:items-center">
             <button
               onClick={find}
               disabled={selected.size === 0}
               className={cn(
-                "inline-flex items-center gap-3 border border-foreground bg-foreground px-8 py-3 font-display text-xs text-background transition-colors",
-                "hover:bg-transparent hover:text-foreground",
-                "disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-foreground disabled:hover:text-background",
+                "group inline-flex items-center gap-3 border border-coffee bg-coffee px-7 py-3 font-stamp text-xs text-primary-foreground transition-all",
+                "shadow-[3px_3px_0_-1px_var(--color-brick)] hover:-translate-y-0.5 hover:bg-brick hover:border-brick",
+                "disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0",
               )}
             >
-              Find an episode
+              find me an episode
+              <ArrowScribble className="h-3 w-9" />
             </button>
 
             <button
               onClick={surprise}
-              className="text-xs uppercase tracking-[0.24em] text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+              className="font-hand text-xl text-brick underline-offset-4 hover:underline"
             >
-              Or pick one at random
+              or just surprise me →
             </button>
           </div>
 
-          <div className="mx-auto mt-12 max-w-2xl border-t border-border pt-6">
+          <div className="mt-10 border-t border-dashed border-rule pt-4">
             <button
               onClick={() => setShowSkip((v) => !v)}
-              className="mx-auto flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-2 font-hand text-lg text-coffee hover:text-brick"
             >
-              Exclude
+              anything you're <em className="not-italic hand-underline">not</em> up for?
               <ChevronDown
-                className={cn("h-3 w-3 transition-transform", showSkip && "rotate-180")}
+                className={cn("h-4 w-4 transition-transform", showSkip && "rotate-180")}
+                strokeWidth={1.6}
               />
             </button>
             {showSkip && (
-              <div className="mt-5 flex flex-wrap justify-center gap-2">
+              <div className="mt-4 flex animate-fade-in flex-wrap gap-2">
                 {SKIP_OPTIONS.map((s) => (
                   <MoodChip
                     key={s.key}
-                    label={s.label}
+                    label={s.label.toLowerCase()}
                     size="sm"
                     selected={skips.has(s.key)}
                     onClick={() => toggleSkip(s.key)}
@@ -178,34 +186,32 @@ function TonightPage() {
           </div>
         </section>
 
-        <section id="pick" className="mt-20">
+        {/* ------- result ------- */}
+        <section id="pick" className="mt-16">
           {current ? (
             <EpisodeCard
               episode={current}
               matchedMoods={mode === "random" ? [] : moodArr}
-              reasonOverride={mode === "random" ? "Chosen at random." : undefined}
+              reasonOverride={mode === "random" ? "rolled the dice on this one." : undefined}
               onTryAgain={mode === "random" ? surprise : find}
             />
           ) : (
-            <div className="mx-auto max-w-xl border-t border-b border-border py-12 text-center">
-              <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-                No episode selected
+            <div className="notebook mx-auto max-w-xl border border-rule px-8 py-12 text-center">
+              <p className="font-hand text-2xl text-coffee">
+                pick a vibe up top ↑
               </p>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Choose a mood above to see a recommendation.
+              <p className="mt-2 font-body text-sm text-muted-foreground">
+                (or hit "surprise me" if you can't decide — we've all been there.)
               </p>
             </div>
           )}
         </section>
       </main>
 
-      <footer className="mx-auto max-w-4xl border-t border-border px-5 py-10 text-center sm:px-8">
-        <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-          An Unofficial Fan Site
-        </p>
-        <p className="mt-3 text-xs text-muted-foreground">
-          Not affiliated with Warner Bros., The WB, The CW, or the producers
-          of Gilmore Girls.
+      <footer className="mx-auto max-w-4xl px-5 pb-10 sm:px-8">
+        <WavyRule className="h-2 w-full text-rule" />
+        <p className="mt-4 text-center font-hand text-lg text-coffee">
+          made by a fan, for fans. not affiliated with the show — just really into it.
         </p>
       </footer>
     </div>
