@@ -5,8 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * stars hollow tonight — a fan-made guide.
- * warm parchment, coffee, muted burgundy, dusty blue, faded sage.
+ * stars hollow tonight
+ * modern streaming ui, gilmore-girls-inspired palette.
+ * wordmark keeps its antique roman voice; everything else is modern sans.
  */
 
 @theme inline {
@@ -37,275 +38,214 @@
   --color-ring: var(--ring);
 
   --color-ink: var(--ink);
+  --color-cream: var(--cream);
   --color-coffee: var(--coffee);
+  --color-coffee-2: var(--coffee-2);
   --color-brick: var(--brick);
   --color-dusty-blue: var(--dusty-blue);
-  --color-sage: var(--sage);
-  --color-rule: var(--rule);
-  --color-paper: var(--paper);
-  --color-paper-2: var(--paper-2);
-  --color-index: var(--index);
+  --color-forest: var(--forest);
+  --color-warm-red: var(--warm-red);
+  --color-mustard: var(--mustard);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-hairline: var(--hairline);
 
-  --font-sans: "Fraunces", "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-display: "Cinzel", "Trajan Pro", "Optima", ui-serif, Georgia, serif;
-  --font-body: "Fraunces", "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-hand: "Caveat", "Kalam", ui-serif, cursive;
-  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: "Cinzel", "Trajan Pro", ui-serif, Georgia, serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
-  /* warm parchment */
-  --background: oklch(0.955 0.022 82);
-  --paper: oklch(0.965 0.02 82);
-  --paper-2: oklch(0.94 0.028 78);
-  --index: oklch(0.925 0.032 75);
+  /* dark warm background — a lit-window-at-night feeling */
+  --background: oklch(0.19 0.014 55);
+  --surface: oklch(0.235 0.016 55);
+  --surface-2: oklch(0.28 0.018 55);
+  --hairline: oklch(0.36 0.02 55);
 
-  /* warm charcoal ink */
-  --foreground: oklch(0.28 0.025 55);
-  --ink: oklch(0.24 0.025 55);
+  --foreground: oklch(0.96 0.012 82);
+  --ink: oklch(0.96 0.012 82);
+  --cream: oklch(0.955 0.022 82);
 
-  --card: oklch(0.97 0.018 82);
-  --card-foreground: oklch(0.28 0.025 55);
-  --popover: oklch(0.97 0.018 82);
-  --popover-foreground: oklch(0.28 0.025 55);
+  --card: oklch(0.235 0.016 55);
+  --card-foreground: oklch(0.96 0.012 82);
+  --popover: oklch(0.235 0.016 55);
+  --popover-foreground: oklch(0.96 0.012 82);
 
-  /* coffee brown — primary action ink */
-  --primary: oklch(0.38 0.055 45);
-  --primary-foreground: oklch(0.97 0.018 82);
-  --coffee: oklch(0.38 0.055 45);
+  /* deep coffee brown */
+  --coffee: oklch(0.42 0.06 45);
+  --coffee-2: oklch(0.32 0.05 42);
 
-  /* muted burgundy / brick */
-  --brick: oklch(0.46 0.11 30);
-  --secondary: oklch(0.9 0.03 78);
-  --secondary-foreground: oklch(0.3 0.03 55);
+  /* muted burgundy / brick — primary action */
+  --brick: oklch(0.48 0.14 25);
+  --primary: oklch(0.48 0.14 25);
+  --primary-foreground: oklch(0.97 0.012 82);
 
-  --muted: oklch(0.92 0.025 78);
-  --muted-foreground: oklch(0.48 0.03 55);
+  --secondary: oklch(0.28 0.018 55);
+  --secondary-foreground: oklch(0.96 0.012 82);
+
+  --muted: oklch(0.28 0.018 55);
+  --muted-foreground: oklch(0.72 0.02 68);
 
   /* dusty blue accent */
-  --dusty-blue: oklch(0.58 0.06 235);
-  --accent: oklch(0.58 0.06 235);
-  --accent-foreground: oklch(0.97 0.018 82);
+  --dusty-blue: oklch(0.62 0.075 235);
+  --accent: oklch(0.62 0.075 235);
+  --accent-foreground: oklch(0.15 0.02 55);
 
-  /* faded sage */
-  --sage: oklch(0.62 0.05 145);
+  /* soft forest green */
+  --forest: oklch(0.55 0.075 155);
 
-  --destructive: oklch(0.5 0.16 25);
-  --destructive-foreground: oklch(0.97 0.018 82);
+  /* warm red (luke's diner signage) */
+  --warm-red: oklch(0.58 0.17 28);
 
-  /* pencil-line rule */
-  --border: oklch(0.75 0.03 68);
-  --rule: oklch(0.68 0.035 65);
-  --input: oklch(0.75 0.03 68);
-  --ring: oklch(0.5 0.06 45);
+  /* warm mustard (autumn accent, used sparingly) */
+  --mustard: oklch(0.75 0.11 82);
+
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(0.97 0.012 82);
+
+  --border: oklch(0.36 0.02 55);
+  --input: oklch(0.36 0.02 55);
+  --ring: oklch(0.62 0.075 235);
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   background-color: var(--color-background);
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
-  /* subtle paper grain */
-  background-image:
-    radial-gradient(oklch(0.6 0.05 55 / 0.045) 1px, transparent 1.4px),
-    radial-gradient(oklch(0.5 0.06 40 / 0.03) 1px, transparent 1.2px);
-  background-size: 22px 22px, 13px 13px;
-  background-position: 0 0, 7px 11px;
+  font-feature-settings: "ss01", "cv11";
 }
 
-/* ------------- typography helpers ------------- */
-
-.font-display {
-  font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-}
+/* ---------- typography helpers ---------- */
 
 .font-wordmark {
-  font-family: var(--font-display);
+  font-family: var(--font-wordmark);
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.font-hand {
-  font-family: var(--font-hand);
-  font-weight: 500;
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
 }
 
 .font-label {
   font-family: var(--font-mono);
   font-weight: 500;
-  text-transform: lowercase;
-  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   font-size: 0.68rem;
 }
 
-.font-stamp {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
+/* ---------- surfaces ---------- */
+
+.surface {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-hairline);
 }
 
-/* ------------- paper + index card textures ------------- */
-
-.paper {
-  background-color: var(--color-paper);
-  background-image:
-    radial-gradient(oklch(0.55 0.04 55 / 0.04) 1px, transparent 1.2px);
-  background-size: 16px 16px;
+.surface-2 {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-hairline);
 }
 
-.paper-card {
-  background-color: var(--color-paper);
-  border: 1px solid var(--color-rule);
-  box-shadow:
-    0 1px 0 oklch(1 0 0 / 0.6) inset,
-    2px 3px 0 -1px oklch(0.6 0.05 55 / 0.08);
+/* soft glow behind hero */
+.aurora {
+  background:
+    radial-gradient(60% 60% at 15% 10%, oklch(0.48 0.14 25 / 0.22), transparent 60%),
+    radial-gradient(50% 50% at 90% 20%, oklch(0.62 0.075 235 / 0.18), transparent 60%),
+    radial-gradient(60% 60% at 60% 100%, oklch(0.42 0.06 45 / 0.28), transparent 60%);
 }
 
-/* index card: horizontal rule lines like a 4x6 */
-.index-card {
-  background-color: var(--color-paper);
-  background-image:
-    linear-gradient(
-      transparent 0,
-      transparent calc(1.75rem - 1px),
-      oklch(0.62 0.08 235 / 0.14) calc(1.75rem - 1px),
-      oklch(0.62 0.08 235 / 0.14) 1.75rem,
-      transparent 1.75rem
-    );
-  background-size: 100% 1.75rem;
-  background-position: 0 1.25rem;
-  border: 1px solid var(--color-rule);
-  position: relative;
+/* horizontal scroll row */
+.row-scroll {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-hairline) transparent;
+}
+.row-scroll > * { scroll-snap-align: start; }
+.row-scroll::-webkit-scrollbar { height: 6px; }
+.row-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 999px;
 }
 
-.index-card::before {
-  /* red left margin line */
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 2.5rem;
-  width: 1px;
-  background: oklch(0.5 0.14 25 / 0.35);
-}
+/* ---------- episode tile backdrops (original, abstract) ---------- */
 
-.index-card::after {
-  /* punch hole top-left */
-  content: "";
-  position: absolute;
-  top: 0.75rem;
-  left: 0.85rem;
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 9999px;
-  background: var(--color-background);
-  border: 1px solid var(--color-rule);
-}
-
-/* notebook lines background */
-.notebook {
-  background-color: var(--color-paper);
-  background-image:
-    linear-gradient(
-      transparent 0,
-      transparent calc(1.5rem - 1px),
-      oklch(0.62 0.08 235 / 0.18) calc(1.5rem - 1px),
-      oklch(0.62 0.08 235 / 0.18) 1.5rem,
-      transparent 1.5rem
-    );
-  background-size: 100% 1.5rem;
-}
-
-/* subtle coffee ring stain — use sparingly */
-.coffee-stain {
-  position: relative;
-}
-.coffee-stain::after {
-  content: "";
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  border: 2px solid oklch(0.38 0.06 45 / 0.16);
-  border-radius: 9999px;
-  right: -10px;
-  top: -10px;
-  transform: rotate(-8deg);
-  pointer-events: none;
-}
-
-/* postage stamp perforation border */
-.stamp {
-  padding: 0.55rem 0.85rem;
-  background: var(--color-paper);
-  border: 1px dashed var(--color-rule);
-  position: relative;
-}
-
-/* hand-drawn underline */
-.hand-underline {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M2 5 C 40 1, 80 7, 120 4 S 180 2, 198 5' stroke='%23703c1e' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  background-size: 100% 6px;
-  padding-bottom: 8px;
-}
-
-/* squiggly divider */
-.squiggle-rule {
-  height: 8px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'><path d='M0 4 Q 10 0 20 4 T 40 4 T 60 4 T 80 4 T 100 4 T 120 4' stroke='%237a5138' stroke-width='1.2' fill='none' stroke-linecap='round'/></svg>");
-  background-repeat: repeat-x;
-  background-position: center;
-}
-
-/* tape strip — for corners of cards */
-.tape {
-  position: absolute;
-  width: 48px;
-  height: 16px;
-  background: oklch(0.86 0.055 88 / 0.75);
-  box-shadow: 0 1px 2px oklch(0.4 0.04 45 / 0.15);
-  transform: rotate(-6deg);
-}
-
-/* rotate helpers for handmade feel */
-.tilt-l { transform: rotate(-1.2deg); }
-.tilt-r { transform: rotate(1.2deg); }
-
-/* checkbox tick effect */
-.tick-mark {
-  position: relative;
-}
-.tick-mark::after {
-  content: "";
+.tile-bg {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 13 l5 5 l11 -14' stroke='%23703c1e' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 90%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.tile-bg::before,
+.tile-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(24px);
+  opacity: 0.9;
 }
 
+.tile-v-coffee { background: linear-gradient(140deg, oklch(0.32 0.05 42), oklch(0.22 0.03 40)); }
+.tile-v-coffee::before { width: 60%; aspect-ratio: 1; right: -10%; top: -20%; background: oklch(0.48 0.14 25 / 0.55); }
+.tile-v-coffee::after { width: 55%; aspect-ratio: 1; left: -15%; bottom: -25%; background: oklch(0.42 0.06 45 / 0.65); }
+
+.tile-v-night { background: linear-gradient(140deg, oklch(0.24 0.04 260), oklch(0.18 0.03 250)); }
+.tile-v-night::before { width: 55%; aspect-ratio: 1; right: -10%; top: -15%; background: oklch(0.62 0.075 235 / 0.55); }
+.tile-v-night::after { width: 50%; aspect-ratio: 1; left: -10%; bottom: -20%; background: oklch(0.48 0.14 25 / 0.45); }
+
+.tile-v-autumn { background: linear-gradient(140deg, oklch(0.34 0.08 55), oklch(0.24 0.04 40)); }
+.tile-v-autumn::before { width: 60%; aspect-ratio: 1; right: -12%; top: -18%; background: oklch(0.62 0.14 45 / 0.55); }
+.tile-v-autumn::after { width: 55%; aspect-ratio: 1; left: -12%; bottom: -22%; background: oklch(0.75 0.11 82 / 0.4); }
+
+.tile-v-forest { background: linear-gradient(140deg, oklch(0.28 0.05 160), oklch(0.2 0.03 155)); }
+.tile-v-forest::before { width: 55%; aspect-ratio: 1; right: -10%; top: -15%; background: oklch(0.55 0.075 155 / 0.55); }
+.tile-v-forest::after { width: 50%; aspect-ratio: 1; left: -12%; bottom: -22%; background: oklch(0.62 0.075 235 / 0.35); }
+
+.tile-v-rose { background: linear-gradient(140deg, oklch(0.3 0.08 20), oklch(0.22 0.04 20)); }
+.tile-v-rose::before { width: 55%; aspect-ratio: 1; right: -10%; top: -15%; background: oklch(0.62 0.16 20 / 0.5); }
+.tile-v-rose::after { width: 50%; aspect-ratio: 1; left: -12%; bottom: -22%; background: oklch(0.75 0.09 82 / 0.35); }
+
+.tile-v-slate { background: linear-gradient(140deg, oklch(0.28 0.02 55), oklch(0.2 0.015 55)); }
+.tile-v-slate::before { width: 55%; aspect-ratio: 1; right: -10%; top: -15%; background: oklch(0.55 0.06 235 / 0.4); }
+.tile-v-slate::after { width: 50%; aspect-ratio: 1; left: -12%; bottom: -22%; background: oklch(0.48 0.14 25 / 0.35); }
+
+/* skeuomorphic focus ring for buttons */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+/* animations */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-4deg); }
-  75% { transform: rotate(4deg); }
-}
 .animate-fade-in { animation: fade-in 0.35s ease-out; }
-.animate-wiggle { animation: wiggle 0.5s ease-in-out; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise { animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 
 @layer base {
-  * {
-    border-color: var(--color-border);
-  }
+  * { border-color: var(--color-border); }
+  ::selection { background: var(--color-brick); color: var(--color-primary-foreground); }
 }
