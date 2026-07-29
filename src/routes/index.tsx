@@ -1,12 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ChevronDown, Coffee, Dices, Landmark, Paperclip, Star } from "lucide-react";
+import {
+  ChevronDown,
+  Dices,
+  Flame,
+  Heart,
+  Landmark,
+  Leaf,
+  Coffee,
+  Popcorn,
+  Sparkles,
+  Tornado,
+  Wand2,
+  type LucideIcon,
+} from "lucide-react";
+
 import { MOODS, SKIP_OPTIONS, type Mood, type SkipTag, type Episode } from "@/data/episodes";
 import { pickEpisode, randomEpisode } from "@/lib/recommend";
 import { MoodChip } from "@/components/MoodChip";
 import { EpisodeCard } from "@/components/EpisodeCard";
 import { SiteNav } from "@/components/SiteNav";
 import { cn } from "@/lib/utils";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,6 +43,19 @@ export const Route = createFileRoute("/")({
   }),
   component: TonightPage,
 });
+
+const MOOD_STICKERS: Partial<Record<Mood | "surprise", { icon: LucideIcon; rotate: string }>> = {
+  cozy: { icon: Coffee, rotate: "-14deg" },
+  emotional: { icon: Heart, rotate: "10deg" },
+  drama: { icon: Flame, rotate: "-8deg" },
+  chaos: { icon: Tornado, rotate: "12deg" },
+  autumn: { icon: Leaf, rotate: "-16deg" },
+  romance: { icon: Sparkles, rotate: "8deg" },
+  starsHollow: { icon: Landmark, rotate: "-10deg" },
+  funny: { icon: Popcorn, rotate: "12deg" },
+  surprise: { icon: Wand2, rotate: "-14deg" },
+};
+
 
 function TonightPage() {
   const [selected, setSelected] = useState<Set<Mood>>(new Set());
@@ -100,18 +128,6 @@ function TonightPage() {
 
       <main className="mx-auto w-full max-w-5xl px-5 pb-24 pt-10 sm:px-8 sm:pt-16">
         <section className="relative text-center">
-          <span
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 -top-6 hidden -translate-x-[9rem] -rotate-[18deg] text-muted-foreground/70 sm:block"
-          >
-            <Paperclip className="h-6 w-6" strokeWidth={1.5} />
-          </span>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 -top-8 hidden translate-x-[7rem] rotate-[10deg] rounded-full border border-border/70 bg-card p-2 text-primary shadow-cozy sm:block"
-          >
-            <Landmark className="h-4 w-4" strokeWidth={1.5} />
-          </span>
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs tracking-[0.22em] text-muted-foreground">
             tonight's pick
           </p>
@@ -124,17 +140,24 @@ function TonightPage() {
           </p>
         </section>
 
+
         <section className="mt-10">
-          <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-2.5 sm:gap-3">
-            {MOODS.map((m) => (
-              <MoodChip
-                key={m.key}
-                label={m.label}
-                selected={m.key !== "surprise" && selected.has(m.key as Mood)}
-                onClick={() => toggleMood(m.key)}
-              />
-            ))}
+          <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-3 sm:gap-4">
+            {MOODS.map((m) => {
+              const s = MOOD_STICKERS[m.key];
+              return (
+                <MoodChip
+                  key={m.key}
+                  label={m.label}
+                  selected={m.key !== "surprise" && selected.has(m.key as Mood)}
+                  onClick={() => toggleMood(m.key)}
+                  sticker={s?.icon}
+                  stickerRotate={s?.rotate}
+                />
+              );
+            })}
           </div>
+
 
           <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center gap-4">
             <button
@@ -166,8 +189,8 @@ function TonightPage() {
               onClick={() => setShowSkip((v) => !v)}
               className="mx-auto flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              <Coffee className="h-3.5 w-3.5" strokeWidth={1.75} />
               what are we not in the mood for?
+
               <ChevronDown
                 className={cn("h-4 w-4 transition-transform", showSkip && "rotate-180")}
               />
@@ -202,7 +225,6 @@ function TonightPage() {
             />
           ) : (
             <div className="mx-auto max-w-2xl rounded-3xl border border-dashed border-border bg-card/40 p-10 text-center text-muted-foreground">
-              <Star className="mx-auto mb-3 h-5 w-5 text-primary/70" strokeWidth={1.5} />
               <p className="font-display text-3xl text-foreground/70">
                 your evening starts up there
               </p>
@@ -210,6 +232,7 @@ function TonightPage() {
                 pick a mood or roll the dice.
               </p>
             </div>
+
           )}
         </section>
       </main>
