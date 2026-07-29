@@ -7,13 +7,14 @@ import {
   Heart,
   Landmark,
   Leaf,
-  Mug,
+  Coffee,
   Popcorn,
   Sparkles,
   Tornado,
   Wand2,
   type LucideIcon,
 } from "lucide-react";
+
 import { MOODS, SKIP_OPTIONS, type Mood, type SkipTag, type Episode } from "@/data/episodes";
 import { pickEpisode, randomEpisode } from "@/lib/recommend";
 import { MoodChip } from "@/components/MoodChip";
@@ -114,18 +115,6 @@ function TonightPage() {
 
       <main className="mx-auto w-full max-w-5xl px-5 pb-24 pt-10 sm:px-8 sm:pt-16">
         <section className="relative text-center">
-          <span
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 -top-6 hidden -translate-x-[9rem] -rotate-[18deg] text-muted-foreground/70 sm:block"
-          >
-            <Paperclip className="h-6 w-6" strokeWidth={1.5} />
-          </span>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 -top-8 hidden translate-x-[7rem] rotate-[10deg] rounded-full border border-border/70 bg-card p-2 text-primary shadow-cozy sm:block"
-          >
-            <Landmark className="h-4 w-4" strokeWidth={1.5} />
-          </span>
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs tracking-[0.22em] text-muted-foreground">
             tonight's pick
           </p>
@@ -137,6 +126,7 @@ function TonightPage() {
             pick a mood or three. we'll queue up the episode.
           </p>
         </section>
+
 
         <section className="mt-10">
           <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-2.5 sm:gap-3">
