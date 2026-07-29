@@ -1,12 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ChevronDown, Coffee, Dices, Landmark, Paperclip, Star } from "lucide-react";
+import {
+  ChevronDown,
+  Dices,
+  Flame,
+  Heart,
+  Landmark,
+  Leaf,
+  Mug,
+  Popcorn,
+  Sparkles,
+  Tornado,
+  Wand2,
+  type LucideIcon,
+} from "lucide-react";
 import { MOODS, SKIP_OPTIONS, type Mood, type SkipTag, type Episode } from "@/data/episodes";
 import { pickEpisode, randomEpisode } from "@/lib/recommend";
 import { MoodChip } from "@/components/MoodChip";
 import { EpisodeCard } from "@/components/EpisodeCard";
 import { SiteNav } from "@/components/SiteNav";
 import { cn } from "@/lib/utils";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
