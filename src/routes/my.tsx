@@ -9,16 +9,16 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/my")({
   head: () => ({
     meta: [
-      { title: "My Gilmore Girls — your Stars Hollow scrapbook" },
+      { title: "My Guide — Stars Hollow Tonight" },
       {
         name: "description",
         content:
-          "Your favorite Gilmore Girls episodes, watchlist, and watch progress across all seven seasons.",
+          "Your saved Gilmore Girls favorites, watchlist, and viewing progress across all 153 episodes.",
       },
-      { property: "og:title", content: "My Gilmore Girls" },
+      { property: "og:title", content: "My Guide — Stars Hollow Tonight" },
       {
         property: "og:description",
-        content: "Your Stars Hollow scrapbook: favorites, watchlist, and progress.",
+        content: "Favorites, watchlist, and progress across all 153 episodes.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/my")({
 const TABS = [
   { key: "favorites", label: "Favorites", icon: Heart },
   { key: "watchlist", label: "Watchlist", icon: Bookmark },
-  { key: "watched", label: "Recently watched", icon: Check },
+  { key: "watched", label: "Watched", icon: Check },
 ] as const;
 
 type TabKey = (typeof TABS)[number]["key"];
@@ -55,36 +55,42 @@ function MyPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
 
-      <main className="mx-auto w-full max-w-5xl px-5 pb-24 pt-10 sm:px-8 sm:pt-16">
-        <section>
-          <p className="mb-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-            your scrapbook
+      <main className="mx-auto w-full max-w-4xl px-5 pb-24 pt-14 sm:px-8 sm:pt-20">
+        <section className="text-center">
+          <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+            Personal Archive
           </p>
-          <h1 className="font-display text-6xl sm:text-7xl">my gilmore girls</h1>
-          <p className="mt-3 max-w-xl text-muted-foreground">
-            everything you've loved, saved, or watched — all in one tiny cozy corner.
+          <h1 className="mt-5 font-wordmark text-3xl leading-tight sm:text-5xl">My Guide</h1>
+          <div className="mx-auto mt-6 h-px w-16 bg-border" />
+          <p className="mx-auto mt-6 max-w-md text-sm text-muted-foreground sm:text-base">
+            Everything you've saved, loved, or watched.
           </p>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-cozy paper-texture sm:p-8">
+        <section className="mt-14 border-t border-b border-border py-8">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="font-display text-3xl">episodes watched</h2>
-            <p className="tabular-nums text-sm text-muted-foreground">
-              <span className="text-2xl font-semibold text-foreground">{watchedCount}</span>{" "}
-              <span className="text-foreground/60">/ {total}</span>
+            <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+              Progress
+            </p>
+            <p className="tabular-nums text-xs uppercase tracking-[0.24em] text-muted-foreground">
+              <span className="text-lg font-medium text-foreground">{watchedCount}</span>
+              <span className="mx-1.5 text-foreground/40">/</span>
+              <span>{total}</span>
             </p>
           </div>
-          <div className="mt-4 h-3 overflow-hidden rounded-full bg-secondary">
+          <div className="mt-5 h-[3px] w-full bg-border">
             <div
-              className="h-full rounded-full bg-primary transition-[width] duration-700 ease-out"
+              className="h-full bg-foreground transition-[width] duration-700 ease-out"
               style={{ width: `${pct}%` }}
             />
           </div>
-          <p className="mt-2 text-xs text-muted-foreground">{pct}% of stars hollow so far</p>
+          <p className="mt-3 text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+            {pct}% Complete
+          </p>
         </section>
 
-        <section className="mt-10">
-          <div className="flex flex-wrap gap-2">
+        <section className="mt-12">
+          <div className="flex flex-wrap justify-center gap-6 border-b border-border pb-4">
             {TABS.map((t) => {
               const Icon = t.icon;
               const active = tab === t.key;
@@ -93,59 +99,53 @@ function MyPage() {
                   key={t.key}
                   onClick={() => setTab(t.key)}
                   className={cn(
-                    "inline-flex items-center gap-2 rounded-full border-2 border-border bg-card px-4 py-2 text-sm font-medium transition-all",
-                    "hover:-translate-y-0.5",
-                    active && "border-primary bg-primary/10 text-primary",
+                    "inline-flex items-center gap-2 border-b-2 border-transparent pb-2 text-xs uppercase tracking-[0.24em] text-muted-foreground transition-colors",
+                    "hover:text-foreground",
+                    active && "border-foreground text-foreground",
                   )}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-3 w-3" />
                   {t.label}
-                  <span className="tabular-nums text-xs text-muted-foreground">
-                    {data[t.key].length}
+                  <span className="tabular-nums text-[10px] text-muted-foreground">
+                    ({data[t.key].length})
                   </span>
                 </button>
               );
             })}
           </div>
 
-          <div className="mt-6">
+          <div className="mt-8">
             {list.length === 0 ? (
-              <div className="rounded-3xl border border-dashed border-border bg-card/40 p-10 text-center">
-                <p className="font-display text-4xl text-foreground/70">nothing here yet</p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  head back to{" "}
-                  <Link to="/" className="text-primary underline underline-offset-4">
-                    tonight's picker
+              <div className="mx-auto max-w-md py-12 text-center">
+                <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+                  Empty
+                </p>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Head back to{" "}
+                  <Link to="/" className="text-foreground underline underline-offset-4">
+                    the picker
                   </Link>{" "}
-                  and start saving your favorites.
+                  to save an episode.
                 </p>
               </div>
             ) : (
-              <ul className="grid gap-4 sm:grid-cols-2">
+              <ul className="divide-y divide-border border-b border-border">
                 {list.map((ep) => (
-                  <li
-                    key={ep.id}
-                    className="rounded-2xl border border-border bg-card p-5 shadow-cozy paper-texture transition-transform hover:-translate-y-0.5"
-                  >
-                    <div className="flex items-baseline gap-3">
-                      <span className="rounded-full bg-secondary px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-secondary-foreground">
-                        S{ep.season}·E{ep.episode}
+                  <li key={ep.id} className="py-6">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <span className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
+                        Season {ep.season} · Ep {ep.episode}
+                      </span>
+                      <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                        {new Date(ep.airDate + "T12:00:00").getFullYear()}
                       </span>
                     </div>
-                    <h3 className="mt-2 font-display text-3xl leading-none">{ep.title}</h3>
+                    <h3 className="mt-2 font-display text-xl leading-tight text-foreground">
+                      {ep.title}
+                    </h3>
                     <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
                       {ep.description}
                     </p>
-                    <div className="mt-3 flex flex-wrap gap-1.5">
-                      {ep.tags.slice(0, 3).map((t) => (
-                        <span
-                          key={t}
-                          className="rounded-full border border-border bg-background/60 px-2 py-0.5 text-[11px] text-foreground/70"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
                   </li>
                 ))}
               </ul>
