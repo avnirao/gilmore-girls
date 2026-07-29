@@ -90,7 +90,7 @@
 
 @font-face {
   font-family: "Bootzy";
-  src: url("/__l5e/assets-v1/d57204f5-84b3-411f-b1a1-f4f27a4bd7a2/BootzyTM.ttf") format("truetype");
+  src: url("/BootzyTM.ttf") format("truetype");
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
