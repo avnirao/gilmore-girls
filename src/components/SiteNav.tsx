@@ -4,7 +4,7 @@ export function SiteNav() {
   return (
     <header className="relative z-10 mx-auto flex w-full max-w-5xl items-center justify-between px-5 pt-6 sm:px-8 sm:pt-8">
       <Link to="/" className="group inline-flex flex-col leading-none">
-        <span className="font-display text-2xl tracking-tight text-foreground">
+        <span className="font-display text-2xl tracking-[0.03em] text-foreground">
           stars hollow tonight
         </span>
         <span className="mt-1 text-[10px] tracking-[0.22em] text-muted-foreground">
