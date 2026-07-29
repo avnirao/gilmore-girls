@@ -28,7 +28,15 @@ export function SiteNav() {
         >
           my gilmore girls
         </Link>
+        <Link
+          to="/rankings"
+          activeProps={{ className: "bg-secondary text-foreground" }}
+          className="rounded-full px-3.5 py-2 font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          rankings
+        </Link>
       </nav>
+
     </header>
   );
 }
