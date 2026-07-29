@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Stars Hollow Tonight — cozy scrapbook design system.
- * Warm cream parchment, coffee neutrals, autumn accents.
+ * stars hollow tonight — a fan-made guide.
+ * warm parchment, coffee, muted burgundy, dusty blue, faded sage.
  */
 
 @theme inline {
@@ -15,8 +15,6 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -38,56 +36,70 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  --color-ink: var(--ink);
+  --color-coffee: var(--coffee);
+  --color-brick: var(--brick);
+  --color-dusty-blue: var(--dusty-blue);
+  --color-sage: var(--sage);
+  --color-rule: var(--rule);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-index: var(--index);
+
   --font-sans: "Fraunces", "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-display: "Cinzel", "Trajan Pro", "Optima", ui-serif, Georgia, serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-
-  --shadow-cozy: 0 1px 0 rgba(120, 82, 50, 0.04),
-    0 12px 30px -18px rgba(120, 82, 50, 0.28),
-    0 4px 10px -6px rgba(120, 82, 50, 0.12);
-
-  --animate-wiggle: wiggle 0.5s ease-in-out;
-  --animate-fade-in: fade-in 0.35s ease-out;
+  --font-body: "Fraunces", "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-hand: "Caveat", "Kalam", ui-serif, cursive;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
 }
 
 :root {
-  --radius: 1rem;
+  --radius: 0.5rem;
 
-  /* warm parchment cream */
-  --background: oklch(0.97 0.018 82);
-  --foreground: oklch(0.28 0.03 45);
+  /* warm parchment */
+  --background: oklch(0.955 0.022 82);
+  --paper: oklch(0.965 0.02 82);
+  --paper-2: oklch(0.94 0.028 78);
+  --index: oklch(0.925 0.032 75);
 
-  --card: oklch(0.985 0.012 82);
-  --card-foreground: oklch(0.28 0.03 45);
-  --popover: oklch(0.985 0.012 82);
-  --popover-foreground: oklch(0.28 0.03 45);
+  /* warm charcoal ink */
+  --foreground: oklch(0.28 0.025 55);
+  --ink: oklch(0.24 0.025 55);
 
-  /* espresso brown */
-  --primary: oklch(0.42 0.06 40);
-  --primary-foreground: oklch(0.98 0.015 82);
+  --card: oklch(0.97 0.018 82);
+  --card-foreground: oklch(0.28 0.025 55);
+  --popover: oklch(0.97 0.018 82);
+  --popover-foreground: oklch(0.28 0.025 55);
 
-  /* soft cafe au lait */
-  --secondary: oklch(0.92 0.025 75);
-  --secondary-foreground: oklch(0.35 0.04 45);
+  /* coffee brown — primary action ink */
+  --primary: oklch(0.38 0.055 45);
+  --primary-foreground: oklch(0.97 0.018 82);
+  --coffee: oklch(0.38 0.055 45);
 
-  --muted: oklch(0.93 0.02 78);
-  --muted-foreground: oklch(0.5 0.03 55);
+  /* muted burgundy / brick */
+  --brick: oklch(0.46 0.11 30);
+  --secondary: oklch(0.9 0.03 78);
+  --secondary-foreground: oklch(0.3 0.03 55);
 
-  /* autumn maple accent */
-  --accent: oklch(0.72 0.14 50);
-  --accent-foreground: oklch(0.2 0.03 40);
+  --muted: oklch(0.92 0.025 78);
+  --muted-foreground: oklch(0.48 0.03 55);
 
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.98 0.015 82);
+  /* dusty blue accent */
+  --dusty-blue: oklch(0.58 0.06 235);
+  --accent: oklch(0.58 0.06 235);
+  --accent-foreground: oklch(0.97 0.018 82);
 
-  --border: oklch(0.88 0.025 75);
-  --input: oklch(0.88 0.025 75);
-  --ring: oklch(0.55 0.08 45);
-}
+  /* faded sage */
+  --sage: oklch(0.62 0.05 145);
 
-@font-face {
-  font-family: "system-fallback";
-  src: local("Georgia");
+  --destructive: oklch(0.5 0.16 25);
+  --destructive-foreground: oklch(0.97 0.018 82);
+
+  /* pencil-line rule */
+  --border: oklch(0.75 0.03 68);
+  --rule: oklch(0.68 0.035 65);
+  --input: oklch(0.75 0.03 68);
+  --ring: oklch(0.5 0.06 45);
 }
 
 body {
@@ -95,53 +107,205 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
+  /* subtle paper grain */
+  background-image:
+    radial-gradient(oklch(0.6 0.05 55 / 0.045) 1px, transparent 1.4px),
+    radial-gradient(oklch(0.5 0.06 40 / 0.03) 1px, transparent 1.2px);
+  background-size: 22px 22px, 13px 13px;
+  background-position: 0 0, 7px 11px;
 }
+
+/* ------------- typography helpers ------------- */
 
 .font-display {
   font-family: var(--font-display);
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
 }
 
 .font-wordmark {
   font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.font-hand {
+  font-family: var(--font-hand);
+  font-weight: 500;
+}
+
+.font-label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.16em;
+  font-size: 0.68rem;
+}
+
+.font-stamp {
+  font-family: var(--font-mono);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.22em;
 }
 
-.shadow-cozy {
-  box-shadow: var(--shadow-cozy);
-}
+/* ------------- paper + index card textures ------------- */
 
-.paper-texture {
+.paper {
+  background-color: var(--color-paper);
   background-image:
-    linear-gradient(var(--color-card), var(--color-card)),
-    radial-gradient(oklch(0.65 0.08 45 / 0.06) 1px, transparent 1px);
-  background-size: auto, 14px 14px;
-  background-blend-mode: multiply;
+    radial-gradient(oklch(0.55 0.04 55 / 0.04) 1px, transparent 1.2px);
+  background-size: 16px 16px;
 }
 
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-6deg); }
-  75% { transform: rotate(6deg); }
+.paper-card {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  box-shadow:
+    0 1px 0 oklch(1 0 0 / 0.6) inset,
+    2px 3px 0 -1px oklch(0.6 0.05 55 / 0.08);
+}
+
+/* index card: horizontal rule lines like a 4x6 */
+.index-card {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(
+      transparent 0,
+      transparent calc(1.75rem - 1px),
+      oklch(0.62 0.08 235 / 0.14) calc(1.75rem - 1px),
+      oklch(0.62 0.08 235 / 0.14) 1.75rem,
+      transparent 1.75rem
+    );
+  background-size: 100% 1.75rem;
+  background-position: 0 1.25rem;
+  border: 1px solid var(--color-rule);
+  position: relative;
+}
+
+.index-card::before {
+  /* red left margin line */
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2.5rem;
+  width: 1px;
+  background: oklch(0.5 0.14 25 / 0.35);
+}
+
+.index-card::after {
+  /* punch hole top-left */
+  content: "";
+  position: absolute;
+  top: 0.75rem;
+  left: 0.85rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 9999px;
+  background: var(--color-background);
+  border: 1px solid var(--color-rule);
+}
+
+/* notebook lines background */
+.notebook {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(
+      transparent 0,
+      transparent calc(1.5rem - 1px),
+      oklch(0.62 0.08 235 / 0.18) calc(1.5rem - 1px),
+      oklch(0.62 0.08 235 / 0.18) 1.5rem,
+      transparent 1.5rem
+    );
+  background-size: 100% 1.5rem;
+}
+
+/* subtle coffee ring stain — use sparingly */
+.coffee-stain {
+  position: relative;
+}
+.coffee-stain::after {
+  content: "";
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 2px solid oklch(0.38 0.06 45 / 0.16);
+  border-radius: 9999px;
+  right: -10px;
+  top: -10px;
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+
+/* postage stamp perforation border */
+.stamp {
+  padding: 0.55rem 0.85rem;
+  background: var(--color-paper);
+  border: 1px dashed var(--color-rule);
+  position: relative;
+}
+
+/* hand-drawn underline */
+.hand-underline {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M2 5 C 40 1, 80 7, 120 4 S 180 2, 198 5' stroke='%23703c1e' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 100% 6px;
+  padding-bottom: 8px;
+}
+
+/* squiggly divider */
+.squiggle-rule {
+  height: 8px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'><path d='M0 4 Q 10 0 20 4 T 40 4 T 60 4 T 80 4 T 100 4 T 120 4' stroke='%237a5138' stroke-width='1.2' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+/* tape strip — for corners of cards */
+.tape {
+  position: absolute;
+  width: 48px;
+  height: 16px;
+  background: oklch(0.86 0.055 88 / 0.75);
+  box-shadow: 0 1px 2px oklch(0.4 0.04 45 / 0.15);
+  transform: rotate(-6deg);
+}
+
+/* rotate helpers for handmade feel */
+.tilt-l { transform: rotate(-1.2deg); }
+.tilt-r { transform: rotate(1.2deg); }
+
+/* checkbox tick effect */
+.tick-mark {
+  position: relative;
+}
+.tick-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 13 l5 5 l11 -14' stroke='%23703c1e' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
 }
 
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-.animate-wiggle { animation: var(--animate-wiggle); }
-.animate-fade-in { animation: var(--animate-fade-in); }
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+}
+.animate-fade-in { animation: fade-in 0.35s ease-out; }
+.animate-wiggle { animation: wiggle 0.5s ease-in-out; }
 
 @layer base {
   * {
     border-color: var(--color-border);
-  }
-  h1, h2, h3 {
-    font-family: var(--font-sans);
   }
 }

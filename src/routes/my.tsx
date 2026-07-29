@@ -4,21 +4,32 @@ import { Heart, Bookmark, Check } from "lucide-react";
 import { episodes } from "@/data/episodes";
 import { useUserData } from "@/lib/storage";
 import { SiteNav } from "@/components/SiteNav";
+import {
+  ArrowScribble,
+  Book,
+  CoffeeCup,
+  EpisodeDoodle,
+  Leaf,
+  Paperclip,
+  StarDoodle,
+  WavyRule,
+} from "@/components/Doodles";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/my")({
   head: () => ({
     meta: [
-      { title: "My Guide — Stars Hollow Tonight" },
+      { title: "my guide — stars hollow tonight" },
       {
         name: "description",
         content:
-          "Your saved Gilmore Girls favorites, watchlist, and viewing progress across all 153 episodes.",
+          "a personal little archive of gilmore girls episodes worth saving, worth watching again, and worth remembering.",
       },
-      { property: "og:title", content: "My Guide — Stars Hollow Tonight" },
+      { property: "og:title", content: "my guide — stars hollow tonight" },
       {
         property: "og:description",
-        content: "Favorites, watchlist, and progress across all 153 episodes.",
+        content:
+          "a personal little archive of gilmore girls episodes worth saving, worth watching again, and worth remembering.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -28,9 +39,9 @@ export const Route = createFileRoute("/my")({
 });
 
 const TABS = [
-  { key: "favorites", label: "Favorites", icon: Heart },
-  { key: "watchlist", label: "Watchlist", icon: Bookmark },
-  { key: "watched", label: "Watched", icon: Check },
+  { key: "favorites", label: "favorites", icon: Heart, note: "the ones on repeat" },
+  { key: "watchlist", label: "watchlist", icon: Bookmark, note: "saved for later" },
+  { key: "watched", label: "watched", icon: Check, note: "already seen" },
 ] as const;
 
 type TabKey = (typeof TABS)[number]["key"];
@@ -51,46 +62,79 @@ function MyPage() {
   const watchedCount = data.watched.length;
   const pct = Math.min(100, Math.round((watchedCount / total) * 100));
 
+  const activeTab = TABS.find((t) => t.key === tab)!;
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-ink">
       <SiteNav />
 
-      <main className="mx-auto w-full max-w-4xl px-5 pb-24 pt-14 sm:px-8 sm:pt-20">
-        <section className="text-center">
-          <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-            Personal Archive
-          </p>
-          <h1 className="mt-5 font-wordmark text-3xl leading-tight sm:text-5xl">My Guide</h1>
-          <div className="mx-auto mt-6 h-px w-16 bg-border" />
-          <p className="mx-auto mt-6 max-w-md text-sm text-muted-foreground sm:text-base">
-            Everything you've saved, loved, or watched.
-          </p>
+      <main className="mx-auto w-full max-w-4xl px-5 pb-24 pt-10 sm:px-8 sm:pt-14">
+        {/* ---------- title block ---------- */}
+        <section className="relative">
+          <div className="flex flex-col items-start gap-2">
+            <span className="font-label text-brick">from the desk of a fan</span>
+            <div className="relative">
+              <h1 className="font-wordmark text-4xl leading-[0.95] text-ink sm:text-6xl">
+                my guide
+              </h1>
+              <span className="font-hand absolute -right-32 top-2 hidden text-2xl text-brick tilt-r sm:block">
+                things worth watching again
+              </span>
+            </div>
+            <span className="font-hand mt-1 text-xl text-brick tilt-r sm:hidden">
+              things worth watching again
+            </span>
+          </div>
+
+          <div className="mt-6 flex items-center gap-3 text-muted-foreground">
+            <WavyRule className="h-2 w-32 text-rule" />
+            <span className="font-hand text-lg text-coffee">kept in this drawer:</span>
+          </div>
+
+          <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 font-label text-muted-foreground">
+            <span>{data.favorites.length} favorites</span>
+            <span>·</span>
+            <span>{data.watchlist.length} on the watchlist</span>
+            <span>·</span>
+            <span>{data.watched.length} watched</span>
+          </div>
         </section>
 
-        <section className="mt-14 border-t border-b border-border py-8">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-              Progress
-            </p>
-            <p className="tabular-nums text-xs uppercase tracking-[0.24em] text-muted-foreground">
-              <span className="text-lg font-medium text-foreground">{watchedCount}</span>
-              <span className="mx-1.5 text-foreground/40">/</span>
-              <span>{total}</span>
-            </p>
+        {/* ---------- progress card ---------- */}
+        <section className="mt-14">
+          <div className="relative">
+            <span className="tape left-6 -top-2 tilt-l" aria-hidden />
+            <span className="tape right-6 -top-2 tilt-r" aria-hidden />
+            <div className="paper-card coffee-stain relative px-6 py-7 sm:px-9 sm:py-8">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="font-stamp text-brick">the complete collection</p>
+                  <p className="mt-2 font-hand text-3xl text-coffee">
+                    all 153 episodes.
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="font-hand text-4xl text-ink">{watchedCount}</p>
+                  <p className="font-label text-muted-foreground">watched</p>
+                </div>
+              </div>
+
+              <ProgressTicks watched={watchedCount} total={total} />
+
+              <p className="mt-4 font-hand text-lg text-ink/80">
+                {pct === 0
+                  ? "the map is empty — start anywhere."
+                  : pct >= 100
+                    ? "you've walked every corner of stars hollow."
+                    : `you've made it through ${pct}% of stars hollow.`}
+              </p>
+            </div>
           </div>
-          <div className="mt-5 h-[3px] w-full bg-border">
-            <div
-              className="h-full bg-foreground transition-[width] duration-700 ease-out"
-              style={{ width: `${pct}%` }}
-            />
-          </div>
-          <p className="mt-3 text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-            {pct}% Complete
-          </p>
         </section>
 
-        <section className="mt-12">
-          <div className="flex flex-wrap justify-center gap-6 border-b border-border pb-4">
+        {/* ---------- tabs (index-card dividers) ---------- */}
+        <section className="mt-14">
+          <div className="flex flex-wrap items-end justify-center gap-2 sm:gap-3">
             {TABS.map((t) => {
               const Icon = t.icon;
               const active = tab === t.key;
@@ -99,60 +143,181 @@ function MyPage() {
                   key={t.key}
                   onClick={() => setTab(t.key)}
                   className={cn(
-                    "inline-flex items-center gap-2 border-b-2 border-transparent pb-2 text-xs uppercase tracking-[0.24em] text-muted-foreground transition-colors",
-                    "hover:text-foreground",
-                    active && "border-foreground text-foreground",
+                    "group relative min-w-[9rem] border border-rule bg-paper px-5 pt-3 pb-2 text-left transition-all",
+                    "hover:-translate-y-1",
+                    active
+                      ? "-translate-y-2 border-coffee bg-index shadow-[2px_3px_0_-1px_var(--color-coffee)]"
+                      : "shadow-[2px_2px_0_-1px_var(--color-rule)]",
+                    // divider tab shape
+                    "rounded-t-md rounded-b-none",
                   )}
+                  style={{
+                    clipPath:
+                      "polygon(0 100%, 0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% 100%)",
+                  }}
                 >
-                  <Icon className="h-3 w-3" />
-                  {t.label}
-                  <span className="tabular-nums text-[10px] text-muted-foreground">
-                    ({data[t.key].length})
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <Icon
+                      className={cn(
+                        "h-3.5 w-3.5",
+                        active ? "text-brick" : "text-muted-foreground",
+                      )}
+                      strokeWidth={1.6}
+                    />
+                    <span
+                      className={cn(
+                        "font-stamp text-xs",
+                        active ? "text-ink" : "text-muted-foreground",
+                      )}
+                    >
+                      {t.label}
+                    </span>
+                    <span className="ml-1 font-mono text-[10px] text-muted-foreground">
+                      ({data[t.key].length})
+                    </span>
+                  </div>
+                  <p className="mt-0.5 font-hand text-sm text-brick">{t.note}</p>
                 </button>
               );
             })}
           </div>
 
-          <div className="mt-8">
+          {/* the drawer contents sit on this rule */}
+          <div
+            className="mt-[-1px] border-t-2 border-coffee"
+            aria-hidden
+          />
+
+          <div className="mt-10">
             {list.length === 0 ? (
-              <div className="mx-auto max-w-md py-12 text-center">
-                <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-                  Empty
-                </p>
-                <p className="mt-4 text-sm text-muted-foreground">
-                  Head back to{" "}
-                  <Link to="/" className="text-foreground underline underline-offset-4">
-                    the picker
-                  </Link>{" "}
-                  to save an episode.
-                </p>
-              </div>
+              <EmptyState tab={activeTab} />
             ) : (
-              <ul className="divide-y divide-border border-b border-border">
-                {list.map((ep) => (
-                  <li key={ep.id} className="py-6">
-                    <div className="flex items-baseline justify-between gap-4">
-                      <span className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
-                        Season {ep.season} · Ep {ep.episode}
-                      </span>
-                      <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                        {new Date(ep.airDate + "T12:00:00").getFullYear()}
-                      </span>
-                    </div>
-                    <h3 className="mt-2 font-display text-xl leading-tight text-foreground">
-                      {ep.title}
-                    </h3>
-                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                      {ep.description}
-                    </p>
+              <ul className="grid gap-6 sm:grid-cols-2">
+                {list.map((ep, i) => (
+                  <li key={ep.id} className={i % 2 === 0 ? "tilt-l" : "tilt-r"}>
+                    <ArchiveCard episode={ep} />
                   </li>
                 ))}
               </ul>
             )}
           </div>
         </section>
+
+        {/* footer note */}
+        <div className="mt-20 flex flex-col items-center gap-3 text-center">
+          <WavyRule className="h-2 w-40 text-rule" />
+          <p className="font-hand text-lg text-coffee">
+            not affiliated with anyone in stars hollow. just a fan.
+          </p>
+        </div>
       </main>
+    </div>
+  );
+}
+
+/* ---------------- pieces ---------------- */
+
+function ProgressTicks({ watched, total }: { watched: number; total: number }) {
+  // 30 tally marks — each represents ~5 episodes; filled proportionally
+  const marks = 30;
+  const filled = Math.round((watched / total) * marks);
+  return (
+    <div className="mt-6">
+      <div className="flex items-end gap-[3px]" aria-hidden>
+        {Array.from({ length: marks }).map((_, i) => {
+          const on = i < filled;
+          const isFifth = (i + 1) % 5 === 0;
+          return (
+            <span
+              key={i}
+              className={cn(
+                "block w-[3px] transition-colors",
+                on ? "bg-coffee" : "bg-rule/60",
+                isFifth ? "h-6" : "h-4",
+              )}
+              style={{
+                transform: `rotate(${(i % 3) - 1}deg) translateY(${(i % 2) * -1}px)`,
+              }}
+            />
+          );
+        })}
+      </div>
+      <div className="mt-1 flex justify-between font-mono text-[10px] text-muted-foreground">
+        <span>0</span>
+        <span>{total}</span>
+      </div>
+    </div>
+  );
+}
+
+function ArchiveCard({ episode }: { episode: (typeof episodes)[number] }) {
+  const year = new Date(episode.airDate + "T12:00:00").getFullYear();
+  return (
+    <article className="index-card group relative min-h-[9rem] px-14 pb-5 pt-5">
+      {/* corner doodle */}
+      <span className="absolute right-3 top-3 text-coffee/80">
+        <EpisodeDoodle seed={episode.id} className="h-6 w-6" />
+      </span>
+
+      <div className="flex items-baseline gap-2 font-stamp text-[10px] text-brick">
+        <span>s{episode.season}</span>
+        <span className="text-rule">/</span>
+        <span>ep {String(episode.episode).padStart(2, "0")}</span>
+        <span className="ml-auto pr-8 font-mono text-[10px] text-muted-foreground">
+          {year}
+        </span>
+      </div>
+
+      <h3 className="mt-2 font-display text-lg leading-tight text-ink">
+        <span className="hand-underline lowercase">{episode.title.toLowerCase()}</span>
+      </h3>
+
+      <p className="mt-3 font-body text-sm leading-snug text-ink/85 line-clamp-3">
+        {episode.description}
+      </p>
+
+      {episode.tags.length > 0 && (
+        <p className="mt-3 font-hand text-base text-brick/90">
+          — {episode.tags.slice(0, 2).join(", ")}
+        </p>
+      )}
+    </article>
+  );
+}
+
+function EmptyState({ tab }: { tab: (typeof TABS)[number] }) {
+  const Icon =
+    tab.key === "favorites" ? Heart : tab.key === "watchlist" ? Bookmark : Check;
+  return (
+    <div className="notebook relative mx-auto max-w-xl border border-rule px-8 py-14 text-center">
+      <div className="mb-6 flex items-center justify-center gap-3 text-coffee/60">
+        <Book className="h-6 w-6" />
+        <StarDoodle className="h-4 w-4" />
+        <CoffeeCup className="h-6 w-6" />
+        <StarDoodle className="h-4 w-4" />
+        <Leaf className="h-6 w-6" />
+      </div>
+
+      <p className="font-hand text-3xl text-ink">nothing here yet.</p>
+      <p className="mx-auto mt-3 max-w-xs font-body text-sm text-muted-foreground">
+        this page is like a blank page in a notebook — quiet, until you fill it in.
+      </p>
+
+      <div className="mt-6 inline-flex items-center gap-2 font-hand text-lg text-brick">
+        <Icon className="h-4 w-4" strokeWidth={1.6} />
+        <span>go find an episode worth saving</span>
+        <ArrowScribble className="h-3 w-9" />
+      </div>
+
+      <div className="mt-5">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 border border-coffee bg-coffee px-5 py-2 font-stamp text-xs text-primary-foreground transition-colors hover:bg-brick hover:border-brick"
+        >
+          <Paperclip className="h-3.5 w-3.5" />
+          back to tonight's picker
+        </Link>
+      </div>
     </div>
   );
 }
