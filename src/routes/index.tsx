@@ -196,6 +196,7 @@ function TonightPage() {
             />
           ) : (
             <div className="mx-auto max-w-2xl rounded-3xl border border-dashed border-border bg-card/40 p-10 text-center text-muted-foreground">
+              <Star className="mx-auto mb-3 h-5 w-5 text-primary/70" strokeWidth={1.5} />
               <p className="font-display text-3xl text-foreground/70">
                 your evening starts up there
               </p>
