@@ -2,18 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import {
   ChevronDown,
+  Coffee,
   Dices,
-  Flame,
-  Heart,
   Landmark,
   Leaf,
-  Coffee,
-  Popcorn,
-  Sparkles,
-  Tornado,
-  Wand2,
   type LucideIcon,
 } from "lucide-react";
+
 
 import { MOODS, SKIP_OPTIONS, type Mood, type SkipTag, type Episode } from "@/data/episodes";
 import { pickEpisode, randomEpisode } from "@/lib/recommend";
@@ -46,15 +41,10 @@ export const Route = createFileRoute("/")({
 
 const MOOD_STICKERS: Partial<Record<Mood | "surprise", { icon: LucideIcon; rotate: string }>> = {
   cozy: { icon: Coffee, rotate: "-14deg" },
-  emotional: { icon: Heart, rotate: "10deg" },
-  drama: { icon: Flame, rotate: "-8deg" },
-  chaos: { icon: Tornado, rotate: "12deg" },
   autumn: { icon: Leaf, rotate: "-16deg" },
-  romance: { icon: Sparkles, rotate: "8deg" },
   starsHollow: { icon: Landmark, rotate: "-10deg" },
-  funny: { icon: Popcorn, rotate: "12deg" },
-  surprise: { icon: Wand2, rotate: "-14deg" },
 };
+
 
 
 function TonightPage() {
