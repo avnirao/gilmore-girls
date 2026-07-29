@@ -44,6 +44,19 @@ export const Route = createFileRoute("/")({
   component: TonightPage,
 });
 
+const MOOD_STICKERS: Partial<Record<Mood | "surprise", { icon: LucideIcon; rotate: string }>> = {
+  cozy: { icon: Coffee, rotate: "-14deg" },
+  emotional: { icon: Heart, rotate: "10deg" },
+  drama: { icon: Flame, rotate: "-8deg" },
+  chaos: { icon: Tornado, rotate: "12deg" },
+  autumn: { icon: Leaf, rotate: "-16deg" },
+  romance: { icon: Sparkles, rotate: "8deg" },
+  starsHollow: { icon: Landmark, rotate: "-10deg" },
+  funny: { icon: Popcorn, rotate: "12deg" },
+  surprise: { icon: Wand2, rotate: "-14deg" },
+};
+
+
 function TonightPage() {
   const [selected, setSelected] = useState<Set<Mood>>(new Set());
   const [skips, setSkips] = useState<Set<SkipTag>>(new Set());
@@ -129,16 +142,22 @@ function TonightPage() {
 
 
         <section className="mt-10">
-          <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-2.5 sm:gap-3">
-            {MOODS.map((m) => (
-              <MoodChip
-                key={m.key}
-                label={m.label}
-                selected={m.key !== "surprise" && selected.has(m.key as Mood)}
-                onClick={() => toggleMood(m.key)}
-              />
-            ))}
+          <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-3 sm:gap-4">
+            {MOODS.map((m) => {
+              const s = MOOD_STICKERS[m.key];
+              return (
+                <MoodChip
+                  key={m.key}
+                  label={m.label}
+                  selected={m.key !== "surprise" && selected.has(m.key as Mood)}
+                  onClick={() => toggleMood(m.key)}
+                  sticker={s?.icon}
+                  stickerRotate={s?.rotate}
+                />
+              );
+            })}
           </div>
+
 
           <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center gap-4">
             <button
