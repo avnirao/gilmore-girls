@@ -228,11 +228,12 @@ function TonightPage() {
         </section>
       </main>
 
+      <MagicEightBall />
+
       <footer className="mx-auto max-w-5xl px-5 pb-10 text-center text-xs text-muted-foreground sm:px-8">
         <p>a fan-made love letter. not affiliated with the show.</p>
       </footer>
-
-      <MagicEightBall />
     </div>
+
   );
 }
