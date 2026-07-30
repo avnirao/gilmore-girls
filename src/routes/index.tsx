@@ -15,6 +15,7 @@ import { pickEpisode, randomEpisode } from "@/lib/recommend";
 import { MoodChip } from "@/components/MoodChip";
 import { EpisodeCard } from "@/components/EpisodeCard";
 import { SiteNav } from "@/components/SiteNav";
+import { MagicEightBall } from "@/components/MagicEightBall";
 import { cn } from "@/lib/utils";
 
 
